@@ -9,96 +9,64 @@ namespace TM_App01
     internal class Trabalhadores
     {
         #region Atributos
-        private int _idCliente { get; set; }
-        private string _primeiroNome { get; set; }
-        private string _ultimoNome { get; set; }
-        private string _email { get; set; }
-        private string _password { get; set; }
-        private DateTime _dataNascimento { get; set; }
-        private string _nacionalidade { get; set; }
-        private DateTime _dataRegistro { get; set; }
+        public enum Regioes
+        {
+            América,
+            Asia,
+            Oceania,
+            Africa,
+            UE
+        }
+        public int IdTrabalhador { get; set; }
+        public string PrimeiroNome { get; set; }
+        public string UltimoNome { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public Regioes Regiao { get; set; }
+        public DateTime DataRegistro { get; set; }
+
+        public List<Projetos> Projetos { get; set; }
         #endregion
 
-        #region Contrutores
+        #region Construtores
         public Trabalhadores()
         {
-            _idCliente = 0;
-            _primeiroNome = "fullname";
-            _ultimoNome = "fullname";
-            _email = "email";
-            _password = "password";
-            _dataNascimento = DateTime.Now;
-            _nacionalidade = "Português";
-            _dataRegistro = DateTime.Now;
+            IdTrabalhador = 0;
+            PrimeiroNome = "primeironome";
+            UltimoNome = "ultimonome";
+            Email = "email@email.com";
+            Password = "password";
+            DataNascimento = DateTime.Now;
+            Regiao = Regioes.UE;
+            DataRegistro = DateTime.Now;
+
+            Projetos = new List<Projetos>();
         }
 
-        public Trabalhadores(int idCliente, string primeiroNome, string ultimoNome, string email, string password,
-            DateTime dataNascimento, string nacionalidade, DateTime dataRegistro)
+        public Trabalhadores(int idTrabalhador, string primeiroNome, string ultimoNome, string email, string password,
+            DateTime dataNascimento, Regioes regiao, DateTime dataRegistro)
         {
-            _idCliente = idCliente;
-            _primeiroNome = primeiroNome;
-            _ultimoNome = ultimoNome;
-            _email = email;
-            _password = password;
-            _dataNascimento = dataNascimento;
-            _nacionalidade = nacionalidade;
-            _dataRegistro = dataRegistro;
+            IdTrabalhador = idTrabalhador;
+            PrimeiroNome = primeiroNome;
+            UltimoNome = ultimoNome;
+            Email = email;
+            Password = password;
+            DataNascimento = dataNascimento;
+            Regiao = regiao;
+            DataRegistro = dataRegistro;
+
+            Projetos = new List<Projetos>();
         }
         #endregion
 
-        #region Dar Get aos Métodos Privados
-        public int GetIdCliente()
-        {
-            return _idCliente;
-        }
-        public string GetPrimeiroNome()
-        {
-            return _primeiroNome;
-        }
-        public string GetUltimoNome()
-        {
-            return _ultimoNome;
-        }
-        public string GetEmail()
-        {
-            return _email;
-        }
-        public string GetPassword()
-        {
-            return _password;
-        }
-        public DateTime GetDataNascimento()
-        {
-            return _dataNascimento;
-        }
-        public string GetNacionalidade()
-        {
-            return _nacionalidade;
-        }
-        public DateTime GetDataRegistro()
-        {
-            return _dataRegistro;
-        }
-        #endregion
-
-        #region Dar Set aos Métodos Privados
-        public void SetEmail(string email)
-        {
-            _email = email;
-        }
-        public void SetPassword(string password)
-        {
-            _password = password;
-        }
-        #endregion        
-
-        #region Método ToString
+        #region ToString
         public override string ToString()
         {
-            return $"Cliente [{_idCliente}]: Primeiro Nome -> {_primeiroNome}, Ultimo Nome -> {_ultimoNome}, " +
-                $"Email -> {_email}, Password -> {_password}, Data Nascimento -> {_dataNascimento}, " +
-                $"Nacionalidade -> {_nacionalidade}, Data Registro {_dataRegistro}.";
+            return $"Cliente [{IdTrabalhador}]: Primeiro Nome -> {PrimeiroNome}, Ultimo Nome -> {UltimoNome}, " +
+                $"Email -> {Email}, Password -> {Password}, Data Nascimento -> {DataNascimento}, " +
+                $"Nacionalidade -> {Regiao}, Data Registro {DataRegistro}.";
         }
-        #endregion      
+        #endregion
     }
 }

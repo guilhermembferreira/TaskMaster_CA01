@@ -9,96 +9,49 @@ namespace TM_App01
     internal class Projetos
     {
         #region Atributos
-        private int _idCliente { get; set; }
-        private string _primeiroNome { get; set; }
-        private string _ultimoNome { get; set; }
-        private string _email { get; set; }
-        private string _password { get; set; }
-        private DateTime _dataNascimento { get; set; }
-        private string _nacionalidade { get; set; }
-        private DateTime _dataRegistro { get; set; }
+        public enum EstadoProjeto
+        {
+            PorFazer,
+            AFazer,
+            Finalizado
+        }
+        public int IdProjeto { get; set; }
+        public string NomeProjeto { get; set; }
+        public string DescricaoProjeto { get; set; }
+        public DateTime DataCriacaoProjeto { get; set; }
+        public DateTime DataFimProjeto { get; set; }
+        public EstadoProjeto Estado { get; set; }
         #endregion
 
-        #region Contrutores
-        public Projetos()
-        {
-            _idCliente = 0;
-            _primeiroNome = "fullname";
-            _ultimoNome = "fullname";
-            _email = "email";
-            _password = "password";
-            _dataNascimento = DateTime.Now;
-            _nacionalidade = "Português";
-            _dataRegistro = DateTime.Now;
+        #region Construtores
+        public Projetos() 
+        { 
+            IdProjeto = 0;
+            NomeProjeto = "projeto";
+            DescricaoProjeto = "descrição";
+            DataCriacaoProjeto = DateTime.Now;
+            DataFimProjeto = DateTime.Now;
+            Estado = EstadoProjeto.PorFazer;
         }
 
-        public Projetos(int idCliente, string primeiroNome, string ultimoNome, string email, string password,
-            DateTime dataNascimento, string nacionalidade, DateTime dataRegistro)
+        public Projetos(int idProjeto, string nomeProjeto, string descricaoProjeto, DateTime dataCriacaoProjeto, DateTime dataFimProjeto, EstadoProjeto estado)
         {
-            _idCliente = idCliente;
-            _primeiroNome = primeiroNome;
-            _ultimoNome = ultimoNome;
-            _email = email;
-            _password = password;
-            _dataNascimento = dataNascimento;
-            _nacionalidade = nacionalidade;
-            _dataRegistro = dataRegistro;
-        }
-        #endregion
-
-        #region Dar Get aos Métodos Privados
-        public int GetIdCliente()
-        {
-            return _idCliente;
-        }
-        public string GetPrimeiroNome()
-        {
-            return _primeiroNome;
-        }
-        public string GetUltimoNome()
-        {
-            return _ultimoNome;
-        }
-        public string GetEmail()
-        {
-            return _email;
-        }
-        public string GetPassword()
-        {
-            return _password;
-        }
-        public DateTime GetDataNascimento()
-        {
-            return _dataNascimento;
-        }
-        public string GetNacionalidade()
-        {
-            return _nacionalidade;
-        }
-        public DateTime GetDataRegistro()
-        {
-            return _dataRegistro;
+            IdProjeto = idProjeto;
+            NomeProjeto = nomeProjeto;
+            DescricaoProjeto = descricaoProjeto;
+            DataCriacaoProjeto = dataCriacaoProjeto;
+            DataFimProjeto = dataFimProjeto;
+            Estado = estado;
         }
         #endregion
 
-        #region Dar Set aos Métodos Privados
-        public void SetEmail(string email)
-        {
-            _email = email;
-        }
-        public void SetPassword(string password)
-        {
-            _password = password;
-        }
-        #endregion
-
-        #region Método ToString
+        #region ToString
         public override string ToString()
         {
-            return $"Cliente [{_idCliente}]: Primeiro Nome -> {_primeiroNome}, Ultimo Nome -> {_ultimoNome}, " +
-                $"Email -> {_email}, Password -> {_password}, Data Nascimento -> {_dataNascimento}, " +
-                $"Nacionalidade -> {_nacionalidade}, Data Registro {_dataRegistro}.";
+            return $"Projeto [{IdProjeto}]: Nome -> {NomeProjeto}, Descrição -> {DescricaoProjeto}, " +
+                $"Data Criação -> {DataCriacaoProjeto}, Data do Fim do Projeto -> {DataFimProjeto}, " +
+                $"Estado do Projeto -> {Estado}.";
         }
-        #endregion      
+        #endregion
     }
 }
