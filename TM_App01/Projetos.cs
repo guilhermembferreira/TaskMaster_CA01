@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace TM_App01
 {
-    internal class Clientes
+    internal class Projetos
     {
-        private int _idCliente {  get; set; }
-        private string _primeiroNome {  get; set; }
-        private string _ultimoNome {  get; set; }
+        #region Atributos
+        private int _idCliente { get; set; }
+        private string _primeiroNome { get; set; }
+        private string _ultimoNome { get; set; }
         private string _email { get; set; }
         private string _password { get; set; }
         private DateTime _dataNascimento { get; set; }
         private string _nacionalidade { get; set; }
         private DateTime _dataRegistro { get; set; }
+        #endregion
 
-        public Clientes()
+        #region Contrutores
+        public Projetos()
         {
             _idCliente = 0;
             _primeiroNome = "fullname";
@@ -29,7 +32,7 @@ namespace TM_App01
             _dataRegistro = DateTime.Now;
         }
 
-        public Clientes(int idCliente, string primeiroNome, string ultimoNome,string email, string password, 
+        public Projetos(int idCliente, string primeiroNome, string ultimoNome, string email, string password,
             DateTime dataNascimento, string nacionalidade, DateTime dataRegistro)
         {
             _idCliente = idCliente;
@@ -41,14 +44,12 @@ namespace TM_App01
             _nacionalidade = nacionalidade;
             _dataRegistro = dataRegistro;
         }
-
-        
-
+        #endregion
 
         #region Dar Get aos Métodos Privados
         public int GetIdCliente()
-        { 
-            return _idCliente; 
+        {
+            return _idCliente;
         }
         public string GetPrimeiroNome()
         {
@@ -66,9 +67,9 @@ namespace TM_App01
         {
             return _password;
         }
-        public DateTime GetDataNascimento() 
-        {  
-            return _dataNascimento; 
+        public DateTime GetDataNascimento()
+        {
+            return _dataNascimento;
         }
         public string GetNacionalidade()
         {
@@ -80,7 +81,7 @@ namespace TM_App01
         }
         #endregion
 
-        #region Dar Set aos Métodos         
+        #region Dar Set aos Métodos Privados
         public void SetEmail(string email)
         {
             _email = email;
@@ -91,11 +92,13 @@ namespace TM_App01
         }
         #endregion
 
+        #region Método ToString
         public override string ToString()
         {
             return $"Cliente [{_idCliente}]: Primeiro Nome -> {_primeiroNome}, Ultimo Nome -> {_ultimoNome}, " +
                 $"Email -> {_email}, Password -> {_password}, Data Nascimento -> {_dataNascimento}, " +
                 $"Nacionalidade -> {_nacionalidade}, Data Registro {_dataRegistro}.";
         }
+        #endregion      
     }
 }
