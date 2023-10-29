@@ -30,6 +30,7 @@ namespace TM_App01
         #endregion
 
         #region Construtores
+        // Vazio
         public Trabalhadores()
         {
             IdTrabalhador = 0;
@@ -57,6 +58,42 @@ namespace TM_App01
             DataRegistro = dataRegistro;
 
             Projetos = new List<Projetos>();
+        }
+        #endregion
+
+        #region Métodos
+        public void AdicionarProjeto(Projetos projeto)
+        {
+            Projetos.Add(projeto);
+        }
+
+        public void RemoverProjeto(Projetos projeto)
+        {
+            if (Projetos.Contains(projeto))
+            {
+                Projetos.Remove(projeto);
+                Console.WriteLine($"Projeto removido da associação do Trabalhador {IdTrabalhador}.");
+            }
+            else
+            {
+                Console.WriteLine($"O Trabalhador {IdTrabalhador} não está associado a esse projeto.");
+            }
+        }
+
+        public void MostrarProjetosAssociados()
+        {
+            Console.WriteLine($"Projetos associados ao Trabalhador [{IdTrabalhador}] - {PrimeiroNome} {UltimoNome}:");
+            foreach (Projetos projeto in Projetos)
+            {
+                Console.WriteLine(projeto.ToString());
+            }
+        }
+
+        public void EditarTrabalhadores(string novoemail, string novopassword, Regioes novoregiao)
+        {
+            Email = novoemail;
+            Password = novopassword;
+            Regiao = novoregiao;
         }
         #endregion
 

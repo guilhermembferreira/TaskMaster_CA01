@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TM_App01
@@ -22,7 +23,7 @@ namespace TM_App01
         public DateTime DataFimProjeto { get; set; }
         public EstadoProjeto Estado { get; set; }
         #endregion
-
+        
         #region Construtores
         public Projetos() 
         { 
@@ -43,6 +44,52 @@ namespace TM_App01
             DataFimProjeto = dataFimProjeto;
             Estado = estado;
         }
+        #endregion
+
+        #region Métodos
+        public void EditarProjeto(string novoNome, string novaDescricao, DateTime novaDataFim, EstadoProjeto novoEstado)
+        {
+            NomeProjeto = novoNome;
+            DescricaoProjeto = novaDescricao;
+            DataFimProjeto = novaDataFim;
+            Estado = novoEstado;
+        }
+
+        public static List<Projetos> ListarProjetosPorEstado(List<Projetos> projetos, int estado)
+        {
+            if (estado == -1)
+            {
+                return projetos;
+            }
+
+            if (estado < 0 || estado > (int)EstadoProjeto.Finalizado)
+            {
+                throw new ArgumentOutOfRangeException(nameof(estado), "Valor do estado fora do intervalo permitido.");
+            }
+
+            EstadoProjeto estadoEnum = (EstadoProjeto)estado;
+
+            List<Projetos> projetosFiltrados = projetos.Where(projeto => projeto.Estado == estadoEnum).ToList();
+            return projetosFiltrados;
+        }
+
+        public static List<Projetos> PesquisarProjetosPorNome(List<Projetos> projetos, string palavraChave)
+        {
+            // Remove espaços em branco e torna a palavra-chave em minúsculas
+            palavraChave = palavraChave.ToLower().Replace(" ", "");
+
+            List<Projetos> projetosFiltrados = projetos
+                .Where(projeto => Regex.IsMatch(
+                    projeto.NomeProjeto.ToLower().Replace(" ", ""), 
+                    $".*{palavraChave}.*"
+                ))
+                .ToList();
+
+            return projetosFiltrados;
+        }
+
+
+
         #endregion
 
         #region ToString
