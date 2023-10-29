@@ -407,6 +407,8 @@ namespace TM_App01
             Console.WriteLine("|---------+------------------------------|");
             Console.WriteLine("|    4    | Menu Editar                  |");
             Console.WriteLine("|---------+------------------------------|");
+            Console.WriteLine("|    5    | Guardar Ficheiros            |");
+            Console.WriteLine("|---------+------------------------------|");
             Console.WriteLine("|    0    | Sair / Terminar o programa   |");
             Console.WriteLine("+---------+------------------------------+");
             int opcao = GetInputUtilizador("Selecione uma opção: ");
@@ -714,6 +716,39 @@ namespace TM_App01
 
         #endregion
 
+        #region Guardar Ficheiros
+        static void GuardarDadosNoArquivo(string nomeArquivo, List<Trabalhadores> trabalhadores, List<Projetos> projetos)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(nomeArquivo))
+                {
+                    foreach (Trabalhadores trabalhador in trabalhadores)
+                    {
+                        sw.WriteLine(trabalhador.ToString());
+
+                        foreach (Projetos projeto in trabalhador.Projetos)
+                        {
+                            sw.WriteLine($"AssociarTrabalhador|{projeto.IdProjeto}|{trabalhador.IdTrabalhador}");
+                        }
+                    }
+
+                    foreach (Projetos projeto in projetos)
+                    {
+                        sw.WriteLine(projeto.ToString());
+                    }
+                }
+
+                Console.WriteLine("Dados guardados com sucesso!");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("Ocorreu um erro ao tentar salvar os dados: " + e.Message);
+            }
+        }
+
+        #endregion
+
         static void Main(string[] args)
         {
             Trabalhadores trabalhadores = new Trabalhadores();
@@ -743,6 +778,11 @@ namespace TM_App01
                     case 4:
                         Console.Clear();
                         SubMenuEdit();
+                        break;
+
+                    case 5:
+                        Console.Clear();
+                        GuardarDadosNoArquivo("data.txt", ListTrabalhadores, ListProjetos);
                         break;
 
                     default:
